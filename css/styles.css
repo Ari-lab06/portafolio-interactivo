@@ -1,0 +1,271 @@
+/* =========================================================
+   Portafolio Interactivo - Estilos propios
+   ========================================================= */
+
+:root {
+    --tinta: #14213d;
+    --papel: #e8f0f2;
+    --amarillo: #fca311;
+    --verde-mar: #2a9d8f;
+    --blanco: #ffffff;
+}
+
+/* ---------- Base ---------- */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
+body {
+    font-family: "Work Sans", system-ui, sans-serif;
+    color: var(--tinta);
+    background-color: var(--papel);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: "Fraunces", Georgia, serif;
+}
+
+/* Colores de botones Bootstrap personalizados */
+.btn-primary {
+    --bs-btn-bg: var(--tinta);
+    --bs-btn-border-color: var(--tinta);
+    --bs-btn-hover-bg: #0d1630;
+    --bs-btn-hover-border-color: #0d1630;
+    --bs-btn-active-bg: #0d1630;
+    --bs-btn-active-border-color: #0d1630;
+}
+
+/* ---------- Navbar ---------- */
+.logo-mark {
+    width: 22px;
+    height: 22px;
+    background: var(--amarillo);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: inline-block;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    padding: 8rem 0 5rem;
+}
+
+.hero-title {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.1;
+}
+
+.hero-lead {
+    margin: 1.2rem 0 1.8rem;
+    max-width: 38ch;
+}
+
+/* ---------- Secciones ---------- */
+.section-proyectos,
+.section-contacto {
+    padding: 5rem 0;
+}
+
+.section-proyectos {
+    background-color: var(--blanco);
+}
+
+.section-title {
+    font-weight: 800;
+}
+
+.section-sub {
+    margin-bottom: 2rem;
+}
+
+/* =========================================================
+   TRANSFORMACIONES 2D + TRANSICIONES (hover)
+   ========================================================= */
+.caja {
+    height: 100%;
+    padding: 1.8rem;
+    color: var(--blanco);
+    border-radius: 0.5rem;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+.caja-rotar {
+    background-color: var(--tinta);
+}
+
+.caja-escalar {
+    background-color: var(--verde-mar);
+}
+
+.caja-trasladar {
+    background-color: #6c4f9e;
+}
+
+/* Caja 1: rotación */
+.caja-rotar:hover {
+    transform: rotate(-6deg);
+    box-shadow: 0 10px 24px rgba(20, 33, 61, 0.35);
+}
+
+/* Caja 2: escalado */
+.caja-escalar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 24px rgba(42, 157, 143, 0.4);
+}
+
+/* Caja 3: traslación + sesgado */
+.caja-trasladar:hover {
+    transform: translateY(-14px) skewX(-6deg);
+    box-shadow: 0 16px 24px rgba(108, 79, 158, 0.4);
+}
+
+/* =========================================================
+   TRANSFORMACIONES 3D
+   ========================================================= */
+.escena-3d {
+    perspective: 1000px;           /* profundidad de la escena */
+    width: 100%;
+    max-width: 340px;
+    height: 220px;
+    margin: 0 auto;
+}
+
+.tarjeta-3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;  /* conserva las caras en 3D */
+    transform: rotateX(8deg) rotateY(-12deg);
+    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.escena-3d:hover .tarjeta-3d {
+    transform: rotateX(0deg) rotateY(180deg);
+}
+
+.cara {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    backface-visibility: hidden;
+    box-shadow: 0 12px 28px rgba(20, 33, 61, 0.25);
+}
+
+.cara-frontal {
+    background-color: var(--amarillo);
+    color: var(--tinta);
+}
+
+.cara-trasera {
+    background-color: var(--tinta);
+    color: var(--blanco);
+    transform: rotateY(180deg);
+}
+
+/* =========================================================
+   ANIMACIONES CSS (@keyframes)
+   ========================================================= */
+
+/* Animación 1: texto que se desliza y cambia de color constantemente */
+@keyframes deslizar-color {
+    0% {
+        transform: translateX(-40px);
+        opacity: 0;
+        color: var(--tinta);
+    }
+    40% {
+        transform: translateX(0);
+        opacity: 1;
+        color: var(--verde-mar);
+    }
+    70% {
+        color: var(--amarillo);
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+        color: var(--tinta);
+    }
+}
+
+.frase-animada {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    font-weight: 800;
+    animation-name: deslizar-color;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Animación 2: spinner (loader) */
+@keyframes girar {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.loader-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--tinta);
+    color: var(--blanco);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-screen.oculto {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-spinner {
+    width: 56px;
+    height: 56px;
+    border: 5px solid rgba(255, 255, 255, 0.25);
+    border-top-color: var(--amarillo);
+    border-radius: 50%;
+    animation-name: girar;
+    animation-duration: 0.9s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Spinner pequeño dentro del botón */
+.btn-spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.5rem;
+    vertical-align: -0.125em;
+    border: 0.15em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: girar 0.7s linear infinite;
+}
+
+/* ---------- Respeto a quienes reducen el movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .frase-animada,
+    .loader-spinner,
+    .btn-spinner {
+        animation-duration: 0.01s;
+        animation-iteration-count: 1;
+    }
+
+    .tarjeta-3d,
+    .caja {
+        transition: none;
+    }
+}
